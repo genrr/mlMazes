@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Header</h1>
+        <p id = "x">
+            Just an <span style="color:blue">innocent</span> paragraph.
+        </p>
+
+        <p class = block></p>
+
+        <button id = "generate" onclick="this.innerHTML = generate()">Button</button>
+
+        
+
+
+
+        <script>
+            var grid;
+            for(i = 0; i<64; i++){
+                for(j = 0; j<64; j++){
+                    grid[i][j] = '#'
+                }
+
+                
+            }
+
+            var c = 2;
+            var e = 0.012;
+            var m = 269;
+            var seed = 251;
+            var max = 1000;
+
+            function generate(i,j){
+                var temp;
+                while(max>0){
+                    max--;
+                    temp = 2 * Math.sin(Math.round((c*Math.log(i*j))/e) % 269);
+                    if(temp <= 2 && temp > 1){
+                        return generate(i-1,j);
+                    }
+                    else if(temp <= 1 && temp > 0){
+                        return generate(i,j-1);
+                    }
+                    else if(temp <= 0 && temp > -1){
+                        return generate(i+1,j);
+                    }
+                    else{
+                        return generate(i,j+1);
+                    }
+                }
+            }
+
+        </script>
+        <script type='text/javascript' src="main.js"></script>
+
+    </body>
+</html>
