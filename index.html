@@ -5,26 +5,47 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <h1>Header</h1>
         <p id = "x">
             Just an <span style="color:blue">innocent</span> paragraph.
         </p>
 
+        <canvas id = "grid" width = "1600" height="1600" style="border:2px solid #000000"></canvas>
+
         <p class = block></p>
 
-        <button id = "generate" onclick="this.innerHTML = generate()">Button</button>
+        <button id = "init" onclick = "init()">Init grid</button>
+        <button id = "generate" onclick="generate()">Generate</button>
 
         
 
 
 
         <script>
-            var grid;
-            for(i = 0; i<64; i++){
-                for(j = 0; j<64; j++){
-                    grid[i][j] = '#'
-                }
+            function init(){
+                var canvas = document.getElementById("grid");
+                var ctx = canvas.getContext("2d");
+                var grid;
 
+
+                ctx.fillStyle = "#0000cc";
+
+                 /*var u = 0;
+                var y = 0;
+                while(u<64){
+                    ctx.fillRect(10*u,25,25,25);
+                    u = u/10;
+                    u++;
+                }*/
+               
+
+                for(var i = 0; i<16){
+                    for(var j = 0; j<16){
+                        //grid[i][j] = '#';
+                        ctx.fillRect(25*i,25*j,25,25);
+                        j++;
+                    }
+                    i++;
+                }
                 
             }
 
@@ -32,11 +53,12 @@
             var e = 0.012;
             var m = 269;
             var seed = 251;
-            var max = 1000;
+            var max = 100;
 
             function generate(i,j){
                 var temp;
                 while(max>0){
+                    grid[i][j] = ' ';
                     max--;
                     temp = 2 * Math.sin(Math.round((c*Math.log(i*j))/e) % 269);
                     if(temp <= 2 && temp > 1){
